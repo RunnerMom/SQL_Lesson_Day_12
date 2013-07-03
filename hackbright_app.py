@@ -14,6 +14,18 @@ def get_student_by_github(github):
     Student: %s %s
     Github account: %s"""%(row[0], row[1], row[2])
 
+def get_grade(title):
+    query = """SELECT * FROM Projects where title=?"""
+    DB.execute(query, (title,))
+    row = DB.fetchone()
+    if row ==None:
+        print "Project does not exist. format grade <title>"
+    else:
+        print """\
+    Project: %s 
+    Description: %s
+    """%(row[0], row[1], row[2])
+
 def connect_to_db():
     global DB, CONN
     CONN = sqlite3.connect("hackbright.db")
